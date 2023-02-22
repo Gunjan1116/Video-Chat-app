@@ -1,52 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Face Time</title>
-    <link rel="stylesheet" href="Style/index.css">
-</head>
-
-<body>
-    <div id="container">
-        <div id="first_box">
-
-        </div>
-
-        <div id="dashboard">
-            <div class="user1"></div>
-            <div class="user2"></div>
-            <div id="user0"></div>
-        </div>
-
-        <div id="chatbox">
-            <h3 id="chat_title">Chat box</h3>
-            <div id="top">
-                <div class="left">
-                    <p>hello</p>
-                </div>
-                <div class="right">
-                    <p>hi</p>
-                </div>
+<html>
+    <head>
+        <title>Face Time</title>
+        <link rel='stylesheet' href='./css/style.css'>
+    </head>
+    <body>
+        <div class='main_container'>
+        <div class='dashboard_container'>
+            <div class='logo_container'>
+                <img id="image_logo" src='./utils/images/FaceTime.png'></img>
             </div>
-
-            <div id="bottom">
-                <form>
-                    <input id="message" type="text" placeholder="Type your message here">
-                    <input id="send" type="submit" value="Send">
-                </form>
+            <div>
+                <div class='description_container'>
+                    <p class='description_container_paragraph'>
+                        Talk with other user by passing his personal code or talk with strangers!
+                    </p>
+                </div>
+                <div class='personal_code_container'>
+                    <div class='personal_code_title_container'>
+                        <p class='personal_code_title_paragraph'>
+                            Your personal code
+                        </p>
+                    </div>
+                    <div class="personal_code_value_container">
+                        <p class='personal_code_value_paragraph' id='personal_code_paragraph'>DDDDDD</p>
+                        <button class='personal_code_copy_button' id='personal_code_copy_button'>
+                            <img src='./utils/images/copyButton.png'></img>
+                        </button>
+                    </div>
+                </div>
+                </div>
+                <div class='personal_code_connecting_container'>
+                    <p class='personal_code_connecting_paragraph'>Personal Code</p>
+                    <div class='personal_code_connecting_input_container'>
+                        <input class='personal_code_input' id='personal_code_input'></input>
+                    </div>
+                    <div class='personal_code_connecting_buttons_container'>
+                        <button class='connecting_button' id='personal_code_chat_button'>
+                            <img src='./utils/images/chatButton.png' class='connecting_buttons_image'></img>
+                        </button>
+                        <button class='connecting_button' id='personal_code_video_button'>
+                            <img src='./utils/images/videoButton.png' class='connecting_buttons_image'></img>
+                        </button>
+                    </div>
+                </div>
+                <div class='stranger_connecting_container'>
+                    <p class='stranger_title_container'>Stranger</p>
+                    <div class='stranger_buttons_container'>
+                        <button class='connecting_button' id='stranger_chat_button'>
+                            <img src='./utils/images/chatButton.png' class='connecting_buttons_image'></img>
+                        </button>
+                        <button class='connecting_button' id='stranger_video_button'>
+                            <img src='./utils/images/videoButton.png' class='connecting_buttons_image'></img>
+                        </button>
+                    </div>
+                </div>
+                <div class='checkbox_container'>
+                    <div class='checkbox_connection' id='allow_strangers_checkbox'>
+                        <img id='allow_strangers_checkbox_image' class='' src='./utils/images/check.png'></img>
+                    </div>
+                    <p class='checkbox_container_paragraph'>Allow connection from strangers</p>
+                </div>
+                <div class='dashboard_blur display_none' id='dashboard_blur'></div>
             </div>
-        </div>
-    </div>
-
-
-
-</body>
-<script src="https://cdn.socket.io/4.6.0/socket.io.min.js"
-    integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
-    crossorigin="anonymous"></script>
-<script src="./Scripts/index.js"></script>
-
+        
+    </body>
 </html>
