@@ -43,8 +43,9 @@ io.on("connection",(socket)=>{
 
     socket.emit("Welcome","Welcome to live video chat app!!");
 
-    socket.on("chatmessage", (msg) => {
-        socket.broadast.emit("chatmessage", msg)
+    socket.on("User_Send", (msg) => {
+        console.log(msg)
+        socket.broadcast.emit("server_send", msg)
     })
 
     socket.on("disconnect",()=>{
