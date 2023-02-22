@@ -16,12 +16,17 @@ const io=new Server(httpServer);
 io.on("connection",(socket)=>{
     console.log("new client connected!!");
 
-    socket.emit("welcome","welcome to live video chat app!!")
+    socket.emit("welcome","welcome to live video chat app!!");
+
+    socket.on("chatmessage", (msg) => {
+        socket.broadast.emit("chatmessage", msg)
+    })
 
     socket.on("disconnect",()=>{
         console.log("user disconnected!!")
     })
 })
+
 
 httpServer.listen(process.env.port,async()=>{
 
