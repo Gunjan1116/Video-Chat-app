@@ -1,32 +1,62 @@
+// External And Internal Modules
+
 const express=require("express");
-const {Server}=require("socket.io");
 const http=require("http");
-const {connection}=require("./Config/db")
+const {Server}=require("socket.io");
+const app = express();
+
+// =========== Routers and Models Location =================
+
+
+const {connection}=require("./Config/db");
+const { UserRouter } = require("./Routes/UserRoute");
+
+
+
 require("dotenv").config();
 
-const app=express()
 const httpServer=http.createServer(app);
+
+
+// =========== For Testing ===========
 
 app.get("/",(req,res)=>{
     res.send("Hello!!")
 })
 
+// =========== Middleware ===========
+
+app.use(express.json())
+app.use('/users',UserRouter)
+
+
+// =========== Socket Connection ===========
+
+
 const io=new Server(httpServer);
 
-io.on("connection",(socket)=>{
-    console.log("new client connected!!");
 
-    socket.emit("welcome","welcome to live video chat app!!");
+
+
+io.on("connection",(socket)=>{
+    console.log("New Client Connected !!");
+
+    socket.emit("Welcome","Welcome to live video chat app!!");
 
     socket.on("chatmessage", (msg) => {
         socket.broadast.emit("chatmessage", msg)
     })
 
     socket.on("disconnect",()=>{
-        console.log("user disconnected!!")
+        console.log("User Disconnected !!")
     })
 })
 
+
+
+
+
+// =========== Listening to Server ===========
 
 httpServer.listen(process.env.port,async()=>{
 
