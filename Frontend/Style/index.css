@@ -1,0 +1,31 @@
+*{
+   margin:0px; 
+   padding: 0px;
+}
+body{
+    /* background-color:rgb(249, 249, 249); */
+}
+
+#container{
+    width:70%;
+    margin: auto;
+    margin-top: 200px;
+    border: 1px solid black;
+    height: 500px;
+    display: flex;
+    box-shadow: rgba(227, 13, 13, 0.35) 0px 5px 15px;
+}
+
+#container>div:nth-child(1),
+#container>div:nth-child(3){
+    height: 100%;
+    width:25%;
+    border: 1px solid red;
+}
+
+#container>div:nth-child(2){
+    height: 100%;
+    width:50%;
+    border: 1px solid green;
+}
+
