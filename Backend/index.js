@@ -1,10 +1,11 @@
 // External And Internal Modules
 
 const express=require("express");
+const cors=require("cors");
 const http=require("http");
 const {Server}=require("socket.io");
 const app = express();
-
+app.use(cors())
 // =========== Routers and Models Location =================
 
 
@@ -36,20 +37,43 @@ app.use('/users',UserRouter)
 const io=new Server(httpServer);
 
 
-
+let allConnectedUsers=[];
 
 io.on("connection",(socket)=>{
     console.log("New Client Connected !!");
+    allConnectedUsers.push(socket.id)
 
-    socket.emit("Welcome","Welcome to live video chat app!!");
 
-    socket.on("User_Send", (msg) => {
-        console.log(msg)
-        socket.broadcast.emit("server_send", msg)
+    socket.on("preOffer",(data)=>{
+        console.log(data)
+        const {connection_type,personal_code}=data;
+
+        const reqUser=allConnectedUsers.find((socketId)=>{//reqUser is the user which send his code to client 2 to connect
+           return socketId==personal_code;
+        })
+        if(reqUser){
+            const data={
+                connection_type,
+                personal_code:socket.id//id of client 2
+            }
+            io.to(personal_code).emit("preOffers",data)//emit the event to the reqUser
+        }
     })
+    //console.log(allConnectedUsers);
+    //socket.emit("Welcome","Welcome to live video chat app!!");
+
+    // socket.on("User_Send", (msg) => {
+    //     console.log(msg)
+    //     socket.broadcast.emit("server_send", msg)
+    // })
 
     socket.on("disconnect",()=>{
-        console.log("User Disconnected !!")
+        console.log("User Disconnected !!");
+        userAvaliable=allConnectedUsers.filter((disconnectedSocketId)=>{
+            return disconnectedSocketId!==socket.id;
+        })
+        allConnectedUsers=userAvaliable;
+        //console.log(allConnectedUsers)
     })
 })
 
