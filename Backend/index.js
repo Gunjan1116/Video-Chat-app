@@ -59,6 +59,19 @@ io.on("connection",(socket)=>{
             io.to(personal_code).emit("preOffers",data)//emit the event to the reqUser
         }
     })
+
+    socket.on("pre_offer_answer",(data)=>{
+        console.log("pre offer answer came")
+        console.log(data)
+
+        // const reqUser=allConnectedUsers.find((socketId)=>{//reqUser is the user which send his code to client 2 to connect
+        //     return socketId==personal_code;
+        //  })
+        //  if(reqUser){
+        //      io.to(personal_code).emit("preOffers",data)//emit the event to the reqUser
+        //  }
+
+    })
     //console.log(allConnectedUsers);
     //socket.emit("Welcome","Welcome to live video chat app!!");
 
