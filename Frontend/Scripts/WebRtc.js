@@ -6,11 +6,18 @@ import * as change from "./change.js";
 let connectedUserDetails;
 export const preOffers=(connection_type,personal_code)=>{
     console.log(connection_type,personal_code)
-    let data={
+    connectedUserDetails={
         connection_type,
-        personal_code
+        socketId:personal_code
     }
-    event.preOffers(data)
+    if(connection_type=="personal_code_chat"||connection_type=="personal_code_video"){
+        let data={
+            connection_type,
+            personal_code
+        }
+        change.showCallingPopUp(callingDialogRejectCallHandler)
+        event.preOffers(data)
+    }
 }
 export const RecivingPreOffer=(data)=>{
     console.log("WebRtc got pre offer")
@@ -26,7 +33,19 @@ export const RecivingPreOffer=(data)=>{
 }
 const acceptCall=()=>{
     console.log("call accepted")
+    sendPreOfferAnswer("Call_Accepted");
 }
 const rejectCall=()=>{
     console.log("call rejected")
+    sendPreOfferAnswer("Call_Rejected");
+}
+const callingDialogRejectCallHandler=()=>{
+    console.log("Rejecting call!!")
+}
+const sendPreOfferAnswer=(preOfferAnswer)=>{
+    const data={
+        callerSocketId: connectedUserDetails.socketId,
+        preOfferAnswer
+    }
+    event.sendPreOfferAnswer(data);
 }
