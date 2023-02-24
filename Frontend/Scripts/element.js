@@ -40,3 +40,32 @@ export const getIncomingCallBox = (connection_type,acceptCall,rejectCall) =>{
     })
     return box
     }
+
+    export const getCallingDialog=(rejectCallHandler)=>{
+        const box = document.createElement("div");
+        box.classList.add("dialog_wrapper")
+        const boxContent = document.createElement("div");
+        boxContent.classList.add("dialog_content")
+        box.appendChild(boxContent)
+        const title=document.createElement("p");
+        title.classList.add('dialog_title');
+        title.innerText=`Calling`
+        const imgContainer=document.createElement('div');
+        imgContainer.classList.add('box_img_container');
+        const img=document.createElement("img");
+        img.setAttribute("src","./utils/images/dialogAvatar.png")
+        imgContainer.appendChild(img)
+        const buttonContainer=document.createElement("div");
+        buttonContainer.classList.add("dialog_button_container");
+        const dropCallButton=document.createElement("button")
+        dropCallButton.classList.add("dialog_reject_call_button");
+        const dropCallImg=document.createElement("img");
+        dropCallImg.classList.add("dialog_button_image");
+        dropCallImg.setAttribute("src","./utils/images/rejectCall.png")
+        dropCallButton.append(dropCallImg)
+        buttonContainer.appendChild(dropCallButton);
+        boxContent.appendChild(title)
+        boxContent.appendChild(imgContainer)
+        boxContent.appendChild(buttonContainer)
+        return box
+        }
