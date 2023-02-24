@@ -16,5 +16,21 @@ export const showIncomingPopUp=(connection_type,acceptCall,rejectCall)=>{
     }else if(connection_type=="personal_code_video"){
         callType="Video"
     }
-    const incomingCallDialog = element.getIncomingCallBox();
+
+    // =================== Incoming Call Dialog Box =================
+    const incomingCallDialog = element.getIncomingCallBox(callType,acceptCall,rejectCall);
+
+    const box=document.getElementById("dialog");
+    box.querySelectorAll("*").forEach((el)=>el.remove());
+    box.appendChild(incomingCallDialog);
+}
+
+// =================== Reject Call Dialog Box =================
+
+export const showCallingPopUp=(rejectCallHandler)=>{
+    const callingDialog=element.getCallingDialog(rejectCallHandler)
+
+    const box=document.getElementById("dialog");
+    box.querySelectorAll("*").forEach((el)=>el.remove());
+    box.appendChild(callingDialog);
 }
