@@ -69,3 +69,27 @@ export const getIncomingCallBox = (connection_type,acceptCall,rejectCall) =>{
         boxContent.appendChild(buttonContainer)
         return box
         }
+
+        // dialog response
+        export const getInfoDialog=(dialogTitle,description)=>{
+            const box = document.createElement("div");
+            box.classList.add("dialog_wrapper")
+            const boxContent = document.createElement("div");
+            boxContent.classList.add("dialog_content")
+            box.appendChild(boxContent)
+            const title=document.createElement("p");
+            title.classList.add('dialog_title');
+            title.innerText=dialogTitle
+            const imgContainer=document.createElement('div');
+            imgContainer.classList.add('box_img_container');
+            const img=document.createElement("img");
+            img.setAttribute("src","./utils/images/dialogAvatar.png")
+            imgContainer.appendChild(img)
+            const desc=document.createElement("p");
+            desc.classList.add("dialog_description");
+            desc.innerText=description
+            boxContent.appendChild(title)
+            boxContent.appendChild(imgContainer)
+            boxContent.appendChild(desc)
+            return box
+        }
