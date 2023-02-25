@@ -4,6 +4,9 @@ import * as WebRtc from "./WebRtc.js";
 const socket = io("http://localhost:5000/", { transports: ["websocket"] });
 //registering event for socketId
 event.registerSocketEvent(socket);
+
+WebRtc.getLocalPreview();
+
 //personal code copy button
 const personal_code_copy_button = document.querySelector(
   "#personal_code_copy_button"

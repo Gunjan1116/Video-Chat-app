@@ -57,6 +57,11 @@ io.on("connection",(socket)=>{
                 personal_code:socket.id//id of client 2
             }
             io.to(personal_code).emit("preOffers",data)//emit the event to the reqUser
+        }else{
+            const data={
+                preOfferAnswer:"Not_Found"
+            }
+            io.to(socket.id).emit("pre_offer_answer",data)
         }
     })
 
@@ -64,12 +69,25 @@ io.on("connection",(socket)=>{
         console.log("pre offer answer came")
         console.log(data)
 
-        // const reqUser=allConnectedUsers.find((socketId)=>{//reqUser is the user which send his code to client 2 to connect
-        //     return socketId==personal_code;
-        //  })
-        //  if(reqUser){
-        //      io.to(personal_code).emit("preOffers",data)//emit the event to the reqUser
-        //  }
+        const reqUser=allConnectedUsers.find((socketId)=>{//reqUser is the user which send his code to client 2 to connect
+            return socketId==data.callerSocketId;
+         })
+         if(reqUser){
+             io.to(data.callerSocketId).emit("pre_offer_answer",data)//emit the event to the reqUser
+         }
+
+    })
+
+    socket.on("webRTC_signaling",(data)=>{
+
+        const {connectedUserSocketId}=data
+
+        const reqUser=allConnectedUsers.find((socketId)=>{//reqUser is the user which send his code to client 2 to connect
+            return socketId==connectedUserSocketId;
+         })
+         if(reqUser){
+            io.to(connectedUserSocketId).emit("webRTC_signaling",data)
+         }
 
     })
     //console.log(allConnectedUsers);

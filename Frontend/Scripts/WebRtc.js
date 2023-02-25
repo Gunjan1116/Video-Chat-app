@@ -4,9 +4,10 @@ import * as state from "./state.js"
 // <---------- Sending offer to the other user ------------>
 
 let connectedUserDetails;
+let peerConnection;
 const defaultConstraints={
-    audio:true,
-    video:true
+    audio:false,
+    video:false
 }
 const configuration={
     iceServers:[

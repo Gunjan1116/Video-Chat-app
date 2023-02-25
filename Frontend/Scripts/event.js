@@ -1,6 +1,7 @@
 import * as state from "./state.js"
 import * as change from "./change.js"
 import * as WebRtc from "./WebRtc.js"
+import * as constants from "./constants.js"
 let socketIo;
 export const registerSocketEvent=(socket)=>{
     socket.on("connect",()=>{
@@ -14,6 +15,13 @@ export const registerSocketEvent=(socket)=>{
         console.log("getting pre offers");
         WebRtc.RecivingPreOffer(data)
     })
+    socket.on("pre_offer_answer",(data)=>{
+        WebRtc.handlePreOfferAnswer(data)
+    })
+    
+    socket.on("webRTC_signaling",(data)=>{
+        
+    })
 }
 export const preOffers=(data)=>{
     console.log("sending pre offers")
@@ -21,4 +29,9 @@ export const preOffers=(data)=>{
 }
 export const sendPreOfferAnswer=(data)=>{
     socketIo.emit("pre_offer_answer",data)
+}
+
+
+export const sendDataUsingWebRTCSignaling=(data)=>{
+    socketIo.emit("webRTC_signaling")
 }
