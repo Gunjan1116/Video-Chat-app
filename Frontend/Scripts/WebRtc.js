@@ -1,6 +1,6 @@
 import * as event from "./event.js";
 import * as change from "./change.js";
-
+import * as state from "./state.js"
 // <---------- Sending offer to the other user ------------>
 
 let connectedUserDetails;
@@ -82,8 +82,12 @@ export const RecivingPreOffer=(data)=>{
     }
 }
 const acceptCall=()=>{
+    
     console.log("call accepted")
+    createPeerConnection()
     sendPreOfferAnswer("Call_Accepted");
+    change.showCallElements(connectedUserDetails.connection_type)
+
 }
 const rejectCall=()=>{
     console.log("call rejected")
@@ -97,5 +101,31 @@ const sendPreOfferAnswer=(preOfferAnswer)=>{
         callerSocketId: connectedUserDetails.socketId,
         preOfferAnswer
     }
+    change.removeAllDialogs();
     event.sendPreOfferAnswer(data);
+}
+
+export const handlePreOfferAnswer=(data)=>{
+    const {preOfferAnswer}=data;
+    console.log("pre offer answers came")
+    console.log(data);
+    change.removeAllDialogs();
+    if(preOfferAnswer==="Not_Found"){
+        change.showInfoDialog(preOfferAnswer)
+        //if not found
+    }
+    if(preOfferAnswer==="Call_Unavailable"){
+        change.showInfoDialog(preOfferAnswer)
+    }
+    if(preOfferAnswer==="Call_Rejected"){
+        change.showInfoDialog(preOfferAnswer)
+    }
+    if(preOfferAnswer==="Call_Accepted"){
+        //send webrtc offer
+        change.showCallElements(connectedUserDetails.connection_type)
+        createPeerConnection();
+        sendWebRTCOffer();
+    }
+}
+const sendWebRTCOffer=()=>{
 }
