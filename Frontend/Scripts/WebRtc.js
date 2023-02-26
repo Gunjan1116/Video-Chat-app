@@ -209,3 +209,35 @@ export const switchBetweenCameraAndScreenSharing=async(screenSharingActive)=>{
         }
     }
 }
+
+//hang up
+export const handleHangUp=()=>{
+    console.log("call ended")
+    const data={
+        connectedUserSocketId:connectedUserDetails.socketId,
+
+    }
+    events.sendUserHangdUp(data);
+    closePeerConnectionAndResetState();
+}
+
+export const handleConnectedUserHangedUp=()=>{
+    console.log("connected client hanged up")
+    closePeerConnectionAndResetState();
+}
+
+const closePeerConnectionAndResetState=()=>{
+    if(peerConnection){
+        peerConnection.close();
+        peerConnection=null;
+    }
+
+    //active mic and camera
+    if(connectedUserDetails.connection_type==="personal_code_video"){
+        state.getState().localStream.getVideoTracks()[0].enabled=true;
+        state.getState().localStream.getAudioTracks()[0].enabled=true;
+    }
+
+    change.updateUIAfterHangUp(connectedUserDetails.connection_type)
+    connectedUserDetails=null
+}

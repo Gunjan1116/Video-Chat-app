@@ -19,6 +19,12 @@ export const registerSocketEvent=(socket)=>{
         WebRtc.handlePreOfferAnswer(data)
     })
     
+
+    //hangup listening to the event
+    socket.on("user_hanged_up",()=>{
+        WebRtc.handleConnectedUserHangedUp()
+    })
+
     socket.on("webRTC_signaling",(data)=>{
             console.log(data);
             switch (data.type){
@@ -47,4 +53,8 @@ export const sendPreOfferAnswer=(data)=>{
 
 export const sendDataUsingWebRTCSignaling=(data)=>{
     socketIo.emit("webRTC_signaling",data)
+}
+
+export const sendUserHangdUp=(data)=>{
+    socketIo.emit("user_hanged_up",data)
 }
