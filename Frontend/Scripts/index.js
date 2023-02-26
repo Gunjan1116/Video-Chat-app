@@ -53,6 +53,19 @@ switchForScreenSharingButton.addEventListener("click",()=>{
   WebRtc.switchBetweenCameraAndScreenSharing(screenSharingActive)
 })
 
+
+//hangup
+
+const hangUpButton=document.getElementById("hang_up_button");
+hangUpButton.addEventListener("click",()=>{
+  WebRtc.handleHangUp();
+})
+
+const hangUpChatButton=document.getElementById("finish_chat_call_button");
+hangUpChatButton.addEventListener("click",()=>{
+  WebRtc.handleHangUp()
+})
+
 // const input_msg = document.querySelector("form");
 // const container = document.getElementById("top")
 // const append =(message,position)=>{

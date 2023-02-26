@@ -128,6 +128,35 @@ export const updateCameraButton=(cameraActive)=>{
     cameraButtonImage.src=cameraActive?"./utils/images/cameraOff.png":"./utils/images/camera.png"
 }
 
+//ui after hangup
+export const updateUIAfterHangUp=(callType)=>{
+    enableDashboard();
+
+    //hide the call buttons
+    if(callType==="personal_code_video"){
+        const callButtons=document.getElementById("call_buttons");
+        hideElement(callButtons)
+    }else{
+        const chatCallButtons=document.getElementById("finish_chat_button_container");
+        hideElement(chatCallButtons)
+    }
+
+    const newMessageInput=document.getElementById("new_message");
+    hideElement(newMessageInput)
+    updateMicButton(false);
+    updateCameraButton(false);
+
+    //hide remote video and show palceholder
+    const remoteVideo=document.getElementById("remote_video");
+    hideElement(remoteVideo);
+
+    const palceholder=document.getElementById("video_placeholder");
+    showElement(palceholder);
+
+    
+}
+
+
 // =================== Dashboard ===================
 
 const enableDashboard=()=>{

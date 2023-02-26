@@ -90,6 +90,18 @@ io.on("connection",(socket)=>{
          }
 
     })
+
+    socket.on("user_hanged_up",(data)=>{
+        const {connectedUserSocketId}=data
+
+        const reqUser=allConnectedUsers.find((socketId)=>{//reqUser is the user which send his code to client 2 to connect
+            return socketId==connectedUserSocketId;
+         })
+         if(reqUser){
+            io.to(connectedUserSocketId).emit("user_hanged_up")
+         }
+
+    })
     //console.log(allConnectedUsers);
     //socket.emit("Welcome","Welcome to live video chat app!!");
 
