@@ -7,8 +7,8 @@ import * as constants from "./constants.js"
 let connectedUserDetails;
 let peerConnection;
 const defaultConstraints={
-    audio:false,
-    video:false
+    audio:true,
+    video:true
 }
 const configuration={
     iceServers:[
