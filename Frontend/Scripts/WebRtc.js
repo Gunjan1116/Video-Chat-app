@@ -175,3 +175,37 @@ export const handleWebRTCCandidate=async(data)=>{
         console.log("error occured when trying to add recived ice candidate",err)
     }
 }
+
+export const switchBetweenCameraAndScreenSharing=async(screenSharingActive)=>{
+    if(screenSharingActive){
+
+    }else{
+        console.log("switching for screen sharing")
+
+        try {
+            screenSharingStream= await navigator.mediaDevices.getDisplayMedia({
+                video:true
+            })
+            state.setScreenSharingStream(screenSharingStream)
+
+            //replacing track which sender is sending
+            const senders=peerConnection.getSenders();
+
+            const sender=sender.find((sender)=>{
+                return (
+                    sender.track.kind===screenSharingStream.getVideoTracks()[0].kind
+                )
+            })
+
+            if(sender){
+                sender.replaceTrack(screenSharingStream.getVideoTracks()[0]);
+            }
+
+            state.setScreenSharingActive(!screenSharingActive)
+
+            change.updateLocalVideo(screenSharingStream)
+        } catch (error) {
+            console.log("error occured when trying to get screen sharing",error)
+        }
+    }
+}

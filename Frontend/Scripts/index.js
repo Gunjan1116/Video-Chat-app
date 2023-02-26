@@ -1,6 +1,7 @@
 import * as state from "./state.js";
 import * as event from "./event.js";
 import * as WebRtc from "./WebRtc.js";
+import * as change from "./change.js"
 const socket = io("http://localhost:5000/", { transports: ["websocket"] });
 //registering event for socketId
 event.registerSocketEvent(socket);
@@ -28,6 +29,30 @@ video_button.addEventListener("click", () => {
   const client2_code = document.querySelector("#personal_code_input").value;
   WebRtc.preOffers("personal_code_video", client2_code);
 });
+
+//event listener for video call buttons
+const micButton=document.getElementById("mic_button")
+micButton.addEventListener("click",()=>{
+  const localStream=state.getState().localStream;
+  const micEnabled=localStream.getAudioTracks()[0].enabled;
+  localStream.getAudioTracks()[0].enabled=!micEnabled;
+  change.updateMicButton(micEnabled)
+})
+
+const cameraButton=document.getElementById("camera_button")
+cameraButton.addEventListener("click",()=>{
+  const localStream=state.getState().localStream;
+  const cameraEnabled=localStream.getVideoTracks()[0].enabled;
+  localStream.getVideoTracks()[0].enabled=!cameraEnabled;
+  change.updateCameraButton(cameraEnabled)
+})
+
+const switchForScreenSharingButton=document.getElementById("screen_sharing_button");
+switchForScreenSharingButton.addEventListener("click",()=>{
+  const screenSharingActive=state.getState().screenSharingActive;
+  WebRtc.switchBetweenCameraAndScreenSharing(screenSharingActive)
+})
+
 // const input_msg = document.querySelector("form");
 // const container = document.getElementById("top")
 // const append =(message,position)=>{

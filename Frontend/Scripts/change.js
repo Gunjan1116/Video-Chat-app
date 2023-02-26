@@ -117,6 +117,17 @@ const showVideoCallElements=()=>{
     disableDashboard();
 }
 
+//mic buttons
+export const updateMicButton=(micActive)=>{
+    const micButtonImage= document.getElementById("mic_button_image");
+    micButtonImage.src=micActive?"./utils/images/micOff.png":"./utils/images/mic.png"
+}
+//camera button
+export const updateCameraButton=(cameraActive)=>{
+    const cameraButtonImage=document.getElementById("camera_button_image");
+    cameraButtonImage.src=cameraActive?"./utils/images/cameraOff.png":"./utils/images/camera.png"
+}
+
 // =================== Dashboard ===================
 
 const enableDashboard=()=>{
