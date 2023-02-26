@@ -20,7 +20,20 @@ export const registerSocketEvent=(socket)=>{
     })
     
     socket.on("webRTC_signaling",(data)=>{
-        
+            console.log(data);
+            switch (data.type){
+                case constants.webRTCSingnaling.OFFER:
+                    WebRtc.handleWebRTCOffer(data);
+                    break;
+                case constants.webRTCSingnaling.ANSWER:
+                    WebRtc.handleWebRTCAnswer(data);
+                    break;
+                case constants.webRTCSingnaling.ICE_CANDIDATE:
+                    WebRtc.handleWebRTCCandidate(data);
+                    break;
+                    default:
+                        return;
+            }
     })
 }
 export const preOffers=(data)=>{
@@ -33,5 +46,5 @@ export const sendPreOfferAnswer=(data)=>{
 
 
 export const sendDataUsingWebRTCSignaling=(data)=>{
-    socketIo.emit("webRTC_signaling")
+    socketIo.emit("webRTC_signaling",data)
 }

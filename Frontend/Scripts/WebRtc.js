@@ -1,6 +1,7 @@
-import * as event from "./event.js";
+import * as events from "./event.js";
 import * as change from "./change.js";
-import * as state from "./state.js"
+import * as state from "./state.js";
+import * as constants from "./constants.js"
 // <---------- Sending offer to the other user ------------>
 
 let connectedUserDetails;
@@ -27,10 +28,16 @@ export const getLocalPreview=()=>{
 }
 const createPeerConnection=()=>{
     peerConnection= new RTCPeerConnection(configuration)
+    console.log(peerConnection)
     peerConnection.onicecandidate=(event)=>{
         console.log("geeting ice candidates from stun server")
         if(event.candidate){
             //sending our ice candiadate to other peer
+            events.sendDataUsingWebRTCSignaling({
+                connectedUserSocketId:connectedUserDetails.socketId,
+                type:constants.webRTCSingnaling.ICE_CANDIDATE,
+                candidate:event.candidate
+            })
         }
     }
     peerConnection.onconnectionstatechange= (event)=>{
@@ -48,7 +55,7 @@ const createPeerConnection=()=>{
     //add our stream to peer connection
     if(connectedUserDetails.connection_type==="personal_code_video"){
         const localStream= state.getState().localStream;
-        for(const track of localStream.getTrack()){
+        for(const track of localStream.getTracks()){
             peerConnection.addTrack(track,localStream)
         }
     }
@@ -67,7 +74,7 @@ export const preOffers=(connection_type,personal_code)=>{
             personal_code
         }
         change.showCallingPopUp(callingDialogRejectCallHandler)
-        event.preOffers(data)
+        events.preOffers(data)
     }
 }
 export const RecivingPreOffer=(data)=>{
@@ -103,7 +110,7 @@ const sendPreOfferAnswer=(preOfferAnswer)=>{
         preOfferAnswer
     }
     change.removeAllDialogs();
-    event.sendPreOfferAnswer(data);
+    events.sendPreOfferAnswer(data);
 }
 
 export const handlePreOfferAnswer=(data)=>{
@@ -128,5 +135,43 @@ export const handlePreOfferAnswer=(data)=>{
         sendWebRTCOffer();
     }
 }
-const sendWebRTCOffer=()=>{
+
+const sendWebRTCOffer=async()=>{
+    const offer= await peerConnection.createOffer();
+    await peerConnection.setLocalDescription(offer)
+    events.sendDataUsingWebRTCSignaling({
+        connectedUserSocketId:connectedUserDetails.socketId,
+        type:constants.webRTCSingnaling.OFFER,
+        offer:offer
+    })
+}
+
+export const handleWebRTCOffer=async(data)=>{
+    console.log("webRTC offer came");
+    console.log(data);
+    await peerConnection.setRemoteDescription(data.offer)
+
+    const answer=await peerConnection.createAnswer();
+    await peerConnection.setLocalDescription(answer)
+    events.sendDataUsingWebRTCSignaling({
+        connectedUserSocketId:connectedUserDetails.socketId,
+        type: constants.webRTCSingnaling.ANSWER,
+        answer:answer
+    })
+}
+
+export const handleWebRTCAnswer=async (data)=>{
+    console.log("handeling webRTC Answer")
+    console.log(data);
+    await peerConnection.setRemoteDescription(data.answer)
+}
+
+export const handleWebRTCCandidate=async(data)=>{
+    console.log("handeling incoming webRTC candidate")
+    try{
+        await peerConnection.addIceCandidate(data.candidate);
+
+    }catch(err){
+        console.log("error occured when trying to add recived ice candidate",err)
+    }
 }

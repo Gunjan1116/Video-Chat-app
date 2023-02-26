@@ -16,6 +16,12 @@ export const updateLocalVideo=(stream)=>{
     })
 }
 
+
+export const updateRemoteVideo=(stream)=>{
+    const remoteVideo=document.getElementById("remote_video");
+    remoteVideo.srcObject=stream;
+}
+
 export const showIncomingPopUp=(connection_type,acceptCall,rejectCall)=>{
     let callType;
     if(connection_type=="personal_code_chat"){
