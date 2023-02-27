@@ -319,7 +319,7 @@ body {
 }
 .remote_video {
   width: 100%;
-  height: 100%;
+  height: 600px;
 }
 .call_buttons_container {
   position: absolute;
