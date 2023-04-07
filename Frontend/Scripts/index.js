@@ -92,4 +92,24 @@ hangUpChatButton.addEventListener("click",()=>{
 // socket.on("server_send",(msg)=>{
 //     console.log(msg);
 //     append(msg,"left")
-// })
+// });
+
+const newMessageInput= document.getElementById('new_message_input');
+let message_container = document.querySelector(".message_container");
+newMessageInput.addEventListener('keydown',(event)=>{
+  console.log("change occured");
+  const key = event.key;
+  if(key ==='Enter'){
+    WebRtc.sendMessageUsingDataChannel(event.target.value);
+    change.appendMessage(event.target.value, true);
+    newMessageInput.value="";
+    message_container.scrollTop = message_container.scrollHeight - message_container.clientHeight;
+  }
+})
+const sendMessageButton= document.getElementById('send_message_button');
+  sendMessageButton.addEventListener('click',()=>{
+    const message= newMessageInput.value;
+    WebRtc.sendMessageUsingDataChannel(message);
+    change.appendMessage(message, true)
+    newMessageInput.value="";
+  });
