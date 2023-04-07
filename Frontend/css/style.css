@@ -38,11 +38,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -10px;
 }
 
 .dashboard_container {
   width: 25%;
-  height: 100%;
+  padding: 10px;
+  height: 100vh;
   background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
   display: flex;
   flex-direction: column;
@@ -220,20 +222,24 @@ body {
 
 .new_message_container {
   position: relative;
+  height:100px;
+  overflow-y: auto;
 }
 .new_message_input {
-  margin: 0 40px;
   margin-bottom: 30px;
   width: calc(100% - 80px);
-  height: 60px;
+  height: 60px; 
   color: #676f7a;
   font-size: 16px;
   font-weight: 400;
   border: 1px solid #d5deeb;
   border-radius: 15px;
   box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
-  padding: 0 60px 0 20px;
+  padding: 0 0px 0 20px;
   z-index: 2;
+  position :absolute;
+  bottom :1%;
+  left :2%;
 }
 
 .new_message_input:focus {
@@ -241,11 +247,14 @@ body {
   color: #676f7a;
 }
 
-.messages_container {
+.message_container {
   flex-grow: 1;
-  margin: 40px 30px;
   overflow-y: scroll;
+  height:100vh;
+  padding: 10px;
+  scroll-behavior: smooth; 
 }
+
 
 .message_left_container {
   display: flex;
@@ -277,12 +286,13 @@ body {
   width: 40px;
   height: 40px;
   position: absolute;
-  right: 50px;
-  top: 10px;
+  right: 60px;
+  bottom: 42px;
   box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
   background: linear-gradient(180deg, #FF9519 0%, #FFBA6A 100%);
   border-radius: 8px;
   transition: 0.5s;
+  z-index: 2;
 }
 .send_message_button_image {
   max-width: 100%;
@@ -432,7 +442,7 @@ body {
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(196, 196, 196, 0.2);
+  background: rgba(110, 109, 109, 0.2);
   background-filter: blur(80px);
 }
 .video_recording_buttons_container {
