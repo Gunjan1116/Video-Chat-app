@@ -45,7 +45,11 @@
   
   <br>
   
-  **Step-4:** User-2 will see the UI in which there will be reject call option if they want to reject the call and user-1 will see a dialgoue box in which their will                 be two option either to reject tje call or accept the call.
+  **Step-4:** User-2 will see the UI in which there will be reject call option if they want to reject the call and user-1 will see a dialgoue box in which their will                 be two option either to reject the call or accept the call.
+  
+  <br>
+  
+  **Step-5:** After user-1 accept the call both user can see each other and can also do chat message. There are other functionality like turning of the camera, turning of the audio, screen sharing and also ending call button.
   
 <hr>
 
