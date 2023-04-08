@@ -20,15 +20,15 @@
 ## Tech Stacks
   
   ### Frontend
-    - HTML
-    - CSS
-    -Javascript
+   - HTML
+   - CSS
+   - Javascript
  ### Backend
-    - NodeJs
-    - Express
-    - Mongoose
-    - WebRTC
-    -Socket.io
+   - NodeJs
+   - Express
+   - Mongoose
+   - WebRTC
+   - Socket.io
 <hr>
 
 
