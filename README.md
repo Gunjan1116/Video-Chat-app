@@ -31,6 +31,12 @@
    - Socket.io
 <hr>
 
+## How to use
+
+  **Step-1:** First click on this link [FaceTime](face-time-video.netlify.app/) . You will be redirected to the landing page of the app.
+  
+<hr>
+
 ## Landing Page 
 ![FaceTime-1](https://user-images.githubusercontent.com/112754725/230730355-e256d52b-a9c0-467c-9e24-06c32e00309e.jpg)
 <hr>
