@@ -35,10 +35,13 @@
 
   **Step-1:** Click on this link [FaceTime](face-time-video.netlify.app/) . You will be redirected to the landing page of the app.
   <br>
+  
   **Step-2:** You(user-1) have to copy your personal code and give it to the person(user-2) you want to connect.
   <br>
+  
   **Step-3:** User-2 have to paste user-1 personal code in the personal code input box and click on the video call.
   <br>
+  
   **Step-4:** User-2 will see the UI in which there will be reject call option if they want to reject the call and user-1 will see a dialgoue box in which their will                 be two option either to reject tje call or accept the call.
   
 <hr>
