@@ -32,7 +32,7 @@
 <hr>
 
 ## Landing Page 
-![Home Page](![FaceTime-1](https://user-images.githubusercontent.com/112754725/230730355-e256d52b-a9c0-467c-9e24-06c32e00309e.jpg)
-)
+![FaceTime-1](https://user-images.githubusercontent.com/112754725/230730355-e256d52b-a9c0-467c-9e24-06c32e00309e.jpg)
+
 
 
