@@ -13,7 +13,7 @@
   
 ## Deployed Link
 
-  [FaceTime](face-time-video.netlify.app/)
+  [FaceTime](https://face-time-video.netlify.app/)
   
 <hr>
 
